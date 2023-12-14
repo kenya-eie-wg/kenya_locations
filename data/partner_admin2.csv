@@ -1,0 +1,148 @@
+county,sub_county,partner
+Narok,Narok East,WERK
+Narok, Narok North,WERK
+Narok, Narok South,WERK
+Narok, Narok West,WERK
+Narok, Transmara East,WERK
+Narok, Transmara West,WERK
+Kajiado,Kajiado Central,WERK
+Kajiado, Kajiado North,WERK
+Kajiado, Kajiado West,WERK
+Kajiado, Kajiado South,WERK
+Kwale,Lungalunga,WERK
+Kwale, Kinango,WERK
+Kwale, Matuga,WERK
+Kwale, Msambweni,WERK
+Tana River,Tana North,WERK
+Tana River, Tana Delta,WERK
+Tana River, Tana River,WERK
+Kilifi,Chonyi,WERK
+Kilifi, Ganze,WERK
+Kilifi, Kaloleni,WERK
+Kilifi, Kauma,WERK
+Kilifi, Kilifi North,WERK
+Kilifi, Kilifi South,WERK
+Kilifi, Magarini,WERK
+Kilifi, Malindi,WERK
+Kilifi, Rabai,WERK
+West Pokot,North Pokot,Fin Church Aid (FCA)
+West Pokot, Pokot Central,Fin Church Aid (FCA)
+West Pokot, Kacheliba,Fin Church Aid (FCA)
+Garissa,Balambala,Fin Church Aid (FCA)
+Garissa, Lagdera,Fin Church Aid (FCA)
+Garissa, Garissa town,Fin Church Aid (FCA)
+Marsabit,Loyangalani,Fin Church Aid (FCA)
+Marsabit, Chalbi,Fin Church Aid (FCA)
+Marsabit, Sololo,Fin Church Aid (FCA)
+Marsabit, Saku,Fin Church Aid (FCA)
+Samburu,Central,Fin Church Aid (FCA)
+Samburu, Samburu East,Fin Church Aid (FCA)
+Turkana,Turkana West,Fin Church Aid (FCA)
+Turkana, Turkana East,Fin Church Aid (FCA)
+Turkana, Turkana South,Fin Church Aid (FCA)
+Nairobi,Kamkunji,Life Skills Promoters (LISP)
+Nairobi, Kasarani,Life Skills Promoters (LISP)
+Nairobi, Embakasi,Life Skills Promoters (LISP)
+Isiolo,Garbatula,Life Skills Promoters (LISP)
+Isiolo, Merti,Life Skills Promoters (LISP)
+Turkana,Turkana Central,Life Skills Promoters (LISP)
+Turkana, Loima,Life Skills Promoters (LISP)
+Nairobi,Kibra,Special Olympics
+Nairobi, Kasarani,Special Olympics
+Nairobi, Mathare,Special Olympics
+Nairobi, Langata,Special Olympics
+Nairobi, Westlands,Special Olympics
+Nairobi, Starehe,Special Olympics
+Nairobi, Makadara,Special Olympics
+Nairobi, Roysambu,Special Olympics
+Nairobi, Kamkunji,Special Olympics
+Nairobi, Ruaraka,Special Olympics
+Nairobi, Dagoreti South,Special Olympics
+Nairobi, Dagoreti North,Special Olympics
+Nairobi, Embakasi North,Special Olympics
+Nairobi, Embakasi South,Special Olympics
+Nairobi, Embakasi Central,Special Olympics
+Nairobi, Embakasi East,Special Olympics
+Nairobi, Embakasi West,Special Olympics
+Turkana,Turkana Central,Special Olympics
+Turkana, Turkana North,Special Olympics
+Turkana, Turkana South,Special Olympics
+Turkana, Turkana West,Special Olympics
+Turkana, Turkana East,Special Olympics
+Turkana, Loima,Special Olympics
+Bungoma,Bungoma South,Special Olympics
+Bungoma, Bungoma North ,Special Olympics
+Bungoma, Bungoma East,Special Olympics
+Bungoma, Bungoma West,Special Olympics
+Bungoma, Bumula,Special Olympics
+Bungoma, Kimilili,Special Olympics
+Bungoma, Cheptais ,Special Olympics
+Bungoma, Mt. Elgon,Special Olympics
+Bungoma, Webuye West,Special Olympics
+Isiolo,Garbatulla,Special Olympics
+Isiolo, Isiolo,Special Olympics
+Isiolo, Merti,Special Olympics
+Kilifi,Ganze,Special Olympics
+Kilifi, Rabai,Special Olympics
+Kilifi, Malindi,Special Olympics
+Kilifi, Kaloleni,Special Olympics
+Kilifi,  Magarini,Special Olympics
+Kilifi,  Kilifi North,Special Olympics
+Kilifi, Kilifi South,Special Olympics
+Garissa,Garissa,Special Olympics
+Garissa, Lagdera,Special Olympics
+Garissa, Fafi,Special Olympics
+Garissa, Dadaab,Special Olympics
+Garissa, Ijara,Special Olympics
+Garissa, Hulogho,Special Olympics
+Garissa, Balambala,Special Olympics
+Marsabit,Marsabit Central,Special Olympics
+Marsabit, Laisamis,Special Olympics
+Marsabit, North Horr,Special Olympics
+Marsabit, Moyale,Special Olympics
+Samburu,Samburu Cenral,Special Olympics
+Samburu, Samburu North,Special Olympics
+Samburu, Samburu East,Special Olympics
+Narok,Narok North,Special Olympics
+Narok, Narok East,Special Olympics
+Narok, Narok South,Special Olympics
+Narok, Narok West,Special Olympics
+Narok, Transmara East,Special Olympics
+Narok, Transmara West,Special Olympics
+Kajiado,Kajiado Central,Special Olympics
+Kajiado, Isinya,Special Olympics
+Kajiado, Mashuru,Special Olympics
+Kajiado, Kajiado North,Special Olympics
+Kajiado, Kajiado West,Special Olympics
+Kajiado, Loitoktok,Special Olympics
+West Pokot,Pokot Central,Special Olympics
+West Pokot, Pokot North,Special Olympics
+West Pokot, Kipkomo,Special Olympics
+West Pokot, West Pokot,Special Olympics
+West Pokot, Pokot South,Special Olympics
+West Pokot, Kacheliba,Special Olympics
+Bungoma,Bungoma West (sirisia),Save the Children
+Bungoma, Webuye West,Save the Children
+Bungoma, Mt. Elgon,Save the Children
+Turkana,Turkana North,Save the Children
+Wajir,Wajir North,Save the Children
+Wajir, Wajir South,Save the Children
+Wajir, Wajir East,Save the Children
+Baringo,Tiaty East,Save the Children
+Baringo, Marigat,Save the Children
+Mandera,Mandera West,Save the Children
+Mandera, Mandera South,Save the Children
+Mandera, Banissa,Save the Children
+Mandera, Mandera South,Save the Children
+Kwale,Matuga,IRCK
+Kwale, Msambweni,IRCK
+Kwale, Lunga Lunga,IRCK
+Turkana,Turkana West,IRCK
+Turkana, Turkana East,IRCK
+Samburu,Samburu East,IRCK
+Samburu, Samburu North,IRCK
+Samburu, Samburu West,IRCK
+Kajiado,Kajiado East,IRCK
+Kajiado, Kajiado Central,IRCK
+Marsabit,Moyale,IRCK
+Marsabit, Saku,IRCK

@@ -1,12 +1,12 @@
 ---
-title: "Untitled"
+title: "Kenya Locations and Census"
 output: html_document
 date: '2023-11-30'
 ---
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 library(tidyverse)
 library(readxl) 
@@ -145,7 +145,7 @@ pcode1_shape <-
           quiet = TRUE) %>% 
   clean_names()
 
-adm2 <- partner_admin2 %>%
+adm2 <- read_csv("./data/partner_admin2.csv") %>% 
   mutate(sub_county = trimws(sub_county), 
          county = trimws(county)) %>% 
   mutate(sub_county = str_replace_all(sub_county, "Lungalunga", "Lunga Lunga"),
@@ -256,6 +256,23 @@ poverty <- read_csv("./data/poverty_chart.csv") %>%
   
 ```
 
+## Constituencies and sub-counties 
+
+Overall, cleaning the geographic data has shown that there is still some confusion amongst those reporting over the exact definition of administrative divisions in Kenya. Admin level 0 is the country, Kenya, itself. At admin level 1 is the County -- there are 47 of these political entities who have various devolved powers outlined in the Constitution of Kenya; each directly elects their governor. 
+
+Additionally, each county has a County Assembly, formed of elected representatives of single-seat constituencies known as wards. Constituencies are considered to be admin level 2, the second level of administrative division in Kenya, and it is these boundaries which have been marked by the shapefiles found in [HDX](https://data.humdata.org/m/dataset/cod-ab-ken). These sometimes do not overlap with the political entities known as sub-counties, though their most notable misalignment is when it comes to urban areas. Sub-counties might better represent the lived realities, or the preferences, of the national and local governments. There is no perfect way to develop administrative boundaries -- though there are usually rules about fairness in the allocation of constituencies. 
+
+Ultimately, the UN recognises these constituencies as the official -- to the government of Kenya -- boundaries as the second administrative level. This is reflected in the shapefiles required to generate maps. Should an actual map of sub-counties be desired, UNICEF is encouraged to meet these demands with its own capacity, in coordination with local authorities.  
+
+Until such data is collected -- an unlikely prospect -- it would be best for UNICEF personnel and partners to report at the level of the constituency. Typically, the officially-recognised administrative boundaries are used for reporting, this is doubly important given that they have p-codes which can be matched against constituency codes created by the Kenyan government as well as against sources of official data, such as the Census. 
+
+Though how well that aligns with actual political realities and the administration of these territories is something for UNICEF to figure out on its own. UNICEF may compare current boundaries with the old defunct sub-counties (collected here by the America Red Cross). But what is more important is that a decision be taken on adherence to using constituencies for reporting and standardising the reporting received from partners and the field. 
+
+It would also be advised to start collecting ward-level data, especially in urban areas. Insufficient granularity is possible from 5W submissions from UNICEF, though not its partners and the other members of the EiE working group. Given this, it is recommended that implementing partners be tasked with completing the relevant reporting and UNICEF compensate them with increased allotments in M&E and IM budgets for the burden placed on them. 
+
+This exercise has underscored the importance of standardised reporting and as well as the use of pcodes. 
+
+<br><br>
 
 # Census
 
@@ -357,7 +374,8 @@ adm2_school_aged_children <- V3_T2.3 %>%
 ```
 
 
-## Census adm2 incomplete
+## Census Admin 2 incomplete matching
+
 
 ```{r}
 # Pcodes have been incompletely matched against the census. Only counties and constituencies relevant to 
@@ -384,10 +402,28 @@ census_adm2_incomplete <- V1_T2.6 %>%
 adm1_pcode_list <- adm1 %>% filter(!is.na(adm1_pcode)) %>% select(adm1_pcode) %>% as.list()
 ```
 
-# Outputs
+As mentioned, the matching of constituencies and sub-counties is incomplete. Even though I prioritised counties that UNICEF are currently working in. Some of these areas are national forests, whilst others, such as Embakasi, encompass a range of constituencies. 
 
-## Adm2 Targets
+Below is a list of the number of sub-counties per county yet to be matched to constituency PCodes: 
 
+<br>
+
+
+```{r}
+census_adm2_incomplete %>% 
+  filter(is.na(adm2_pcode)) %>% 
+  mutate(count = 1) %>% 
+  group_by(county) %>% 
+  summarise(count = sum(count)) %>% 
+  arrange(desc(count)) %>% 
+  flextable() %>% 
+  theme_zebra() %>% 
+  set_caption("Sub-counties not matched to constituency Pcodes") %>% 
+  set_table_properties(layout = "autofit", width = .5)
+```
+
+
+# Outputs and Exports
 
 ```{r}
 
@@ -510,7 +546,7 @@ locations_match <- locations %>%
                names_to = "origin", 
                values_to = "adm2_en") %>% 
   filter(!is.na(adm2_en)) %>% 
-  left_join(census_adm2_incomplete %>%
+  full_join(census_adm2_incomplete %>%
               distinct(county, sub_county, sub_county_pcode),
              by = c("adm1_en" = "county", 
                     "adm2_en" = "sub_county")) %>% 
@@ -521,38 +557,61 @@ locations_match <- locations %>%
   
 ```
 
-# Export Out
+```{r}
+poverty <- read_csv("./data/poverty_chart.csv") %>% 
+  `colnames<-`(c("county", "poverty_incidence", "distribution_of_poor", 
+                 "poverty_gap", "severity_of_poverty", "population", "number_of_poor")) %>% 
+  mutate(county = str_replace_all(county, "Taita/Taveta", "Taita Taveta"), 
+         county = str_replace_all(county, "Elgeyo/Marakwet", "Elgeyo-Marakwet"), 
+         county = str_replace_all(county, "Nairobi City", "Nairobi")) %>% 
+  left_join(locations %>% 
+              distinct(adm1_en, adm1_pcode), 
+            by = c("county" = "adm1_en"))
+
+poverty %>% write_csv("./data/poverty.csv")
+```
+
+
+The following outputs are produced by this file: 
+
+* `locations.csv` -- updated locations and their alternate names. Pay attention to the columns `adm2alt1en` and `adm2alt2en`: these are where the alternate names of each constituency have been recorded. Download [here](https://github.com/kenya-eie-wg/kenya_locations/blob/main/data/locations.csv)
+
+* `locations_match.csv` -- file for matching sub-county pcodes with constituency pcodes. In long format, with all names and alternate names recorded under the column `adm2_en`. Download [here](https://github.com/kenya-eie-wg/kenya_locations/blob/main/data/locations_match.csv)
+
+* `census_adm2_incomplete.csv` -- columns are listed below. But this is a collection of basic data at the sub-county level, including the population, average household size, and the breakdown of children by by age group. As noted, sub-county and constituency matching is incomplete. Download [here](https://github.com/kenya-eie-wg/kenya_locations/blob/main/data/census_adm2_incomplete.csv)
+
+* `poverty.csv` -- county-level poverty incidence and counts. Download [here](https://github.com/kenya-eie-wg/kenya_locations/blob/main/data/poverty.csv)
+
+<br>
+
+```{r echo=TRUE}
+census_adm2_incomplete %>% 
+  glimpse()
+```
+
 
 
 ```{r}
 
 adm2_targets %>% 
-  write_csv("./data/adm2_targets.csv")
-
-adm2_targets %>% 
-  write_csv("C:/Users/seanywng/Documents/R/operation_come_to_school_public/data/adm2_targets.csv")
+  write_csv("./data/adm2_targets_operation_come_to_school.csv")
 
 adm2 %>% write_csv("./data/adm2_reference.csv")
 
-adm2 %>% write_csv("C:/Users/seanywng/Documents/R/operation_come_to_school_public/data/adm2_reference.csv")
-
 locations %>% write_csv("./data/locations.csv")
-
-locations %>% write_csv("C:/Users/seanywng/Documents/R/operation_come_to_school_public/data/locations.csv")
 
 locations_match %>% write_csv("./data/locations_match.csv")
 
-locations_match %>% 
-  write_csv("C:/Users/seanywng/Documents/R/operation_come_to_school_public/data/locations_match.csv")
-
-census_adm2_incomplete %>% write_csv("C:/Users/seanywng/Documents/R/operation_come_to_school_public/data/census_adm2_incomplete.csv")
+census_adm2_incomplete %>% write_csv("./data/census_adm2_incomplete.csv")
 
 ```
 
+<br><br><br>
 
 # Alternate sub-counties shapefile
 
-Verification and matching needed. 
+Verification and matching needed. This is from the [Africa Research and Impact Network](https://geodata.arin-africa.org/layers/geonode:ke_subcounty). 
+
 
 ```{r}
 # These shapes are supposedly subcounties, 
